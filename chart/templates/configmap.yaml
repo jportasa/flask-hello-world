@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config
+  labels:
+    app: doodle
+data:
+  config.yaml: |
+    server:
+      listen:
+        address: {{ .Values.server.listen.address }}
+        port: {{ .Values.server.listen.port }}

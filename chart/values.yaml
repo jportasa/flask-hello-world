@@ -1,0 +1,21 @@
+replicaCount: 1
+
+image:
+  name: doodle
+  tag: 0.1.0
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 100Mi
+  limits:
+    cpu: 200m
+    memory: 200Mi
+
+service:
+  type: ClusterIP
+
+server:
+  listen:
+    address: 0.0.0.0
+    port: 8081

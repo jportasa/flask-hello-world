@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: doodle
+spec:
+  selector:
+    matchLabels:
+      app: doodle
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: doodle
+    spec:
+      containers:
+      - name: doodle
+        image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
+          limits:
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
+        volumeMounts:
+          - name: mnt
+            mountPath: /config
+      volumes:
+      - name: mnt
+        configMap:
+          name: config
